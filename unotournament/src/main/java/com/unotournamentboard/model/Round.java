@@ -14,40 +14,48 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
 @NodeEntity
 public class Round {
 
-    @GraphId
-    private long id;
+	@GraphId
+	private long id;
 
-    @RelatedToVia(type = "PLAYED", direction = Direction.INCOMING)
-    private Iterator<PlayedRelationship> playersPlayed;
+	@RelatedToVia(type = "PLAYED", direction = Direction.INCOMING)
+	private Iterator<PlayedRelationship> playersPlayed;
 
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
+	public Round() {
+		// Do nothing.
+	}
 
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
+	public PlayedRelationship endRoundFor(Player player, Integer finalPoints) {
+		return new PlayedRelationship(player, this, finalPoints);
+	}
 
-    /**
-     * @return the playersPlayed
-     */
-    public Iterator<PlayedRelationship> getPlayersPlayed() {
-        return playersPlayed;
-    }
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
+	}
 
-    /**
-     * @param playersPlayed
-     *            the playersPlayed to set
-     */
-    public void setPlayersPlayed(Iterator<PlayedRelationship> playersPlayed) {
-        this.playersPlayed = playersPlayed;
-    }
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the playersPlayed
+	 */
+	public Iterator<PlayedRelationship> getPlayersPlayed() {
+		return playersPlayed;
+	}
+
+	/**
+	 * @param playersPlayed
+	 *            the playersPlayed to set
+	 */
+	public void setPlayersPlayed(Iterator<PlayedRelationship> playersPlayed) {
+		this.playersPlayed = playersPlayed;
+	}
 
 }

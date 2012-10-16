@@ -21,6 +21,16 @@ public class Member {
 
     private Date from;
 
+    public Member() {
+		// Do nothing.
+	}
+
+    public Member(Player player, Community community) {
+    	this.setPlayer(player);
+    	this.setCommunity(community);
+    	this.setFrom(new Date());
+    }
+    
     /**
      * @return the player
      */

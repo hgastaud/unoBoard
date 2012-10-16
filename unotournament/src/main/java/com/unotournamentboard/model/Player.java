@@ -17,77 +17,105 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
 @NodeEntity
 public class Player {
 
-    @GraphId
-    private long id;
+	@GraphId
+	private long id;
 
-    private String name;
+	private String name;
 
-    private String lastName;
+	private String lastName;
 
-    private String username;
+	private String username;
 
-    private String password;
+	private String password;
 
-    private String country;
+	private String country;
 
-    @RelatedTo(type = "FRIEND", direction = Direction.OUTGOING)
-    private Set<Player> friends;
+	@RelatedTo(type = "FRIEND", direction = Direction.OUTGOING)
+	private Set<Player> friends;
 
-    @RelatedToVia(type = "MEMBER_OF", direction = Direction.OUTGOING)
-    public Set<Player> getFriends() {
-        return friends;
-    }
+	@RelatedToVia(type = "MEMBER_OF", direction = Direction.OUTGOING)
+	private Iterable<Member> memberships;
 
-    public void setFriends(Set<Player> friends) {
-        this.friends = friends;
-    }
+	public Player() {
+		// Do nothing.
+	}
 
-    public long getId() {
-        return id;
-    }
+	public Player(String name, String lastName, String username, String password, String country) {
+		this.setName(name);
+		this.setLastName(lastName);
+		this.setUsername(username);
+		this.setPassword(password);
+		this.setCountry(country);
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public Friendship addANewFriend(Player player) {
+		Friendship friendship = new Friendship(this, player);
+		this.getFriends().add(player);
+		return friendship;
+	}
+	
+	public Iterable<Member> getMemberships() {
+		return memberships;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setMemberships(Iterable<Member> memberships) {
+		this.memberships = memberships;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public Set<Player> getFriends() {
+		return friends;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setFriends(Set<Player> friends) {
+		this.friends = friends;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public String getCountry() {
-        return country;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 }

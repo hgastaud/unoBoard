@@ -6,59 +6,72 @@ import org.springframework.data.neo4j.annotation.StartNode;
 
 /**
  * @author hgastaud
- *
+ * 
  */
 @RelationshipEntity
 public class PlayedRelationship {
 
-    @StartNode
-    private Player player;
-    
-    @EndNode
-    private Round round;
-    
-    private int points;
+	@StartNode
+	private Player player;
 
-    /**
-     * @return the player
-     */
-    public Player getPlayer() {
-        return player;
-    }
+	@EndNode
+	private Round round;
 
-    /**
-     * @param player the player to set
-     */
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+	private int points;
 
-    /**
-     * @return the round
-     */
-    public Round getRound() {
-        return round;
-    }
+	public PlayedRelationship() {
+		// Do nothing.
+	}
 
-    /**
-     * @param round the round to set
-     */
-    public void setRound(Round round) {
-        this.round = round;
-    }
+	public PlayedRelationship(Player player, Round round, int points) {
+		this.setPlayer(player);
+		this.setRound(round);
+		this.setPoints(points);
+	}
 
-    /**
-     * @return the points
-     */
-    public int getPoints() {
-        return points;
-    }
+	/**
+	 * @return the player
+	 */
+	public Player getPlayer() {
+		return player;
+	}
 
-    /**
-     * @param points the points to set
-     */
-    public void setPoints(int points) {
-        this.points = points;
-    }
-    
+	/**
+	 * @param player
+	 *            the player to set
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	/**
+	 * @return the round
+	 */
+	public Round getRound() {
+		return round;
+	}
+
+	/**
+	 * @param round
+	 *            the round to set
+	 */
+	public void setRound(Round round) {
+		this.round = round;
+	}
+
+	/**
+	 * @return the points
+	 */
+	public int getPoints() {
+		return points;
+	}
+
+	/**
+	 * @param points
+	 *            the points to set
+	 */
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
 }

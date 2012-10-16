@@ -1,12 +1,17 @@
 package com.unotournamentboard.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.util.CollectionUtils;
 
 /**
  * @author hgastaud
@@ -15,140 +20,207 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 @NodeEntity
 public class Tournament {
 
-    @GraphId
-    private long id;
+	@GraphId
+	private Long id;
 
-    private String name;
+	private String name;
 
-    private Date startDate;
+	private Date startDate;
 
-    private Date endDate;
-    
-    private int maxOfPoints = 0;
-    
-    private int maxOfHooks = 0;
-    
-    @RelatedTo(type = "PLAYED_IN", direction = Direction.INCOMING)
-    private Set<Player> players;
-    
-    @RelatedTo(type = "ROUND_OF", direction = Direction.OUTGOING)
-    private Set<Round> rounds;
-    
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
+	private Date endDate;
 
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
+	private Integer maxOfPoints = 0;
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+	private Integer maxOfHooks = 0;
 
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	@RelatedTo(type = "PLAYED_IN", direction = Direction.INCOMING)
+	private Set<Player> players;
 
-    /**
-     * @return the startDate
-     */
-    public Date getStartDate() {
-        return startDate;
-    }
+	@RelatedTo(type = "ROUND_OF", direction = Direction.OUTGOING)
+	private Set<Round> rounds;
 
-    /**
-     * @param startDate
-     *            the startDate to set
-     */
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+	private transient List<PlayerInTournament> tournamentPlayers;
 
-    /**
-     * @return the endDate
-     */
-    public Date getEndDate() {
-        return endDate;
-    }
+	public Tournament() {
+		// Do nothing.
+	}
 
-    /**
-     * @param endDate
-     *            the endDate to set
-     */
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+	public Tournament(String name, int maxPoints, int maxHooks, Date start, Date end) {
+		this.setName(name);
+		this.setMaxOfPoints(maxOfPoints);
+		this.setMaxOfHooks(maxOfHooks);
+		this.setStartDate(start);
+		this.setEndDate(end);
+		this.setPlayers(new HashSet<Player>());
+		this.setRounds(new HashSet<Round>());
+		this.setTournamentPlayers(new ArrayList<PlayerInTournament>());
+	}
 
-    /**
-     * @return the players
-     */
-    public Set<Player> getPlayers() {
-        return players;
-    }
+	public void startTournament() {
+		for (Player eachPlayer : this.getPlayers()) {
+			this.getTournamentPlayers().add(new PlayerInTournament(eachPlayer));
+		}
+	}
+	
+	public void addANewRound(Round round){
+		this.getRounds().add(round);
+		Iterator<PlayedRelationship> playersPlayed = round.getPlayersPlayed();
+		while(playersPlayed.hasNext()){
+			PlayedRelationship eachPlayerPlayed = playersPlayed.next();
+			// TODO
+		}
+	}
 
-    /**
-     * @param players
-     *            the players to set
-     */
-    public void setPlayers(Set<Player> players) {
-        this.players = players;
-    }
+	public Tournament(String name, int maxPoints, int maxHooks, Date start) {
+		this(name, maxPoints, maxHooks, start, null);
+	}
 
-    /**
-     * @return the rounds
-     */
-    public Set<Round> getRounds() {
-        return rounds;
-    }
+	public Tournament(String name, int maxPoints, int maxHooks) {
+		this(name, maxPoints, maxHooks, new Date(), null);
+	}
 
-    /**
-     * @param rounds the rounds to set
-     */
-    public void setRounds(Set<Round> rounds) {
-        this.rounds = rounds;
-    }
+	public Tournament(String name, int maxPoints) {
+		this(name, maxPoints, 0, new Date(), null);
+	}
 
-    /**
-     * @return the maxOfPoints
-     */
-    public int getMaxOfPoints() {
-        return maxOfPoints;
-    }
+	public void addPlayer(Player player) {
+		this.getPlayers().add(player);
+	}
 
-    /**
-     * @param maxOfPoints the maxOfPoints to set
-     */
-    public void setMaxOfPoints(int maxOfPoints) {
-        this.maxOfPoints = maxOfPoints;
-    }
+	public void removePlayer(Player player) {
+		this.getPlayers().remove(player);
+	}
 
-    /**
-     * @return the maxOfHooks
-     */
-    public int getMaxOfHooks() {
-        return maxOfHooks;
-    }
+	public int getRoundsPLayed() {
+		return this.getRounds().size();
+	}
 
-    /**
-     * @param maxOfHooks the maxOfHooks to set
-     */
-    public void setMaxOfHooks(int maxOfHooks) {
-        this.maxOfHooks = maxOfHooks;
-    }
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the startDate
+	 */
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	/**
+	 * @param startDate
+	 *            the startDate to set
+	 */
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	/**
+	 * @return the endDate
+	 */
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	/**
+	 * @param endDate
+	 *            the endDate to set
+	 */
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	/**
+	 * @return the players
+	 */
+	public Set<Player> getPlayers() {
+		return players;
+	}
+
+	/**
+	 * @param players
+	 *            the players to set
+	 */
+	public void setPlayers(Set<Player> players) {
+		this.players = players;
+	}
+
+	/**
+	 * @return the rounds
+	 */
+	public Set<Round> getRounds() {
+		return rounds;
+	}
+
+	/**
+	 * @param rounds
+	 *            the rounds to set
+	 */
+	public void setRounds(Set<Round> rounds) {
+		this.rounds = rounds;
+	}
+
+	/**
+	 * @return the maxOfPoints
+	 */
+	public Integer getMaxOfPoints() {
+		return maxOfPoints;
+	}
+
+	/**
+	 * @param maxOfPoints
+	 *            the maxOfPoints to set
+	 */
+	public void setMaxOfPoints(Integer maxOfPoints) {
+		this.maxOfPoints = maxOfPoints;
+	}
+
+	/**
+	 * @return the maxOfHooks
+	 */
+	public Integer getMaxOfHooks() {
+		return maxOfHooks;
+	}
+
+	/**
+	 * @param maxOfHooks
+	 *            the maxOfHooks to set
+	 */
+	public void setMaxOfHooks(Integer maxOfHooks) {
+		this.maxOfHooks = maxOfHooks;
+	}
+
+	protected List<PlayerInTournament> getTournamentPlayers() {
+		return tournamentPlayers;
+	}
+
+	protected void setTournamentPlayers(List<PlayerInTournament> tournamentPlayers) {
+		this.tournamentPlayers = tournamentPlayers;
+	}
 
 }

@@ -17,77 +17,107 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 @NodeEntity
 public class Community {
 
-    @GraphId
-    private long id;
+	@GraphId
+	private Long id;
 
-    private String name;
+	private String name;
 
-    private Date creationDate;
+	private Date creationDate;
 
-    @RelatedTo(type = "MEMBER_OF", direction = Direction.INCOMING)
-    private Set<Player> members;
+	@RelatedTo(type = "MEMBER_OF", direction = Direction.INCOMING)
+	private Set<Player> members;
 
-    @RelatedTo(type = "HAVES", direction = Direction.OUTGOING)
-    private Set<Tournament> tournaments;
+	@RelatedTo(type = "HAVES", direction = Direction.OUTGOING)
+	private Set<Tournament> tournaments;
 
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
+	public Community() {
+		// Do nothing.
+	}
 
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
+	public Community(String name) {
+		this.setName(name);
+		this.setCreationDate(new Date());
+	}
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+	public Member createNewMemberShip(Player player) {
+		this.getMembers().add(player);
+		return new Member(player, this);
+	}
 
-    /**
-     * @param name
-     *            the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void addNewTournament(Tournament tournament) {
+		this.getTournaments().add(tournament);
+	}
 
-    /**
-     * @return the creationDate
-     */
-    public Date getCreationDate() {
-        return creationDate;
-    }
+	public void removeTournament(Tournament tournament) {
+		this.getTournaments().remove(tournament);
+	}
 
-    /**
-     * @param creationDate
-     *            the creationDate to set
-     */
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
+	public Set<Tournament> getTournaments() {
+		return tournaments;
+	}
 
-    /**
-     * @return the members
-     */
-    public Set<Player> getMembers() {
-        return members;
-    }
+	public void setTournaments(Set<Tournament> tournaments) {
+		this.tournaments = tournaments;
+	}
 
-    /**
-     * @param members
-     *            the members to set
-     */
-    public void setMembers(Set<Player> members) {
-        this.members = members;
-    }
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the creationDate
+	 */
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	/**
+	 * @param creationDate
+	 *            the creationDate to set
+	 */
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	/**
+	 * @return the members
+	 */
+	public Set<Player> getMembers() {
+		return members;
+	}
+
+	/**
+	 * @param members
+	 *            the members to set
+	 */
+	public void setMembers(Set<Player> members) {
+		this.members = members;
+	}
 
 }
