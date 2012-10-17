@@ -11,67 +11,93 @@ import org.springframework.data.neo4j.annotation.StartNode;
 @RelationshipEntity
 public class PlayedRelationship {
 
-	@StartNode
-	private Player player;
+    @StartNode
+    private Player player;
 
-	@EndNode
-	private Round round;
+    @EndNode
+    private Round round;
 
-	private int points;
+    private int points;
 
-	public PlayedRelationship() {
-		// Do nothing.
-	}
+    private Boolean theWinner;
 
-	public PlayedRelationship(Player player, Round round, int points) {
-		this.setPlayer(player);
-		this.setRound(round);
-		this.setPoints(points);
-	}
+    public PlayedRelationship() {
+        // Do nothing.
+    }
 
-	/**
-	 * @return the player
-	 */
-	public Player getPlayer() {
-		return player;
-	}
+    public PlayedRelationship(Player player, Round round, int points, boolean won) {
+        this.setPlayer(player);
+        this.setRound(round);
+        this.setPoints(points);
+        this.setTheWinner(won);
+    }
 
-	/**
-	 * @param player
-	 *            the player to set
-	 */
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+    public PlayedRelationship(Player player, Round round, int points) {
+        this(player, round, points, false);
+    }
 
-	/**
-	 * @return the round
-	 */
-	public Round getRound() {
-		return round;
-	}
+    public PlayedRelationship(Player player, Round round) {
+        this(player, round, 0, true);
+    }
 
-	/**
-	 * @param round
-	 *            the round to set
-	 */
-	public void setRound(Round round) {
-		this.round = round;
-	}
+    /**
+     * @return the player
+     */
+    public Player getPlayer() {
+        return player;
+    }
 
-	/**
-	 * @return the points
-	 */
-	public int getPoints() {
-		return points;
-	}
+    /**
+     * @param player
+     *            the player to set
+     */
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
-	/**
-	 * @param points
-	 *            the points to set
-	 */
-	public void setPoints(int points) {
-		this.points = points;
-	}
+    /**
+     * @return the round
+     */
+    public Round getRound() {
+        return round;
+    }
+
+    /**
+     * @param round
+     *            the round to set
+     */
+    public void setRound(Round round) {
+        this.round = round;
+    }
+
+    /**
+     * @return the points
+     */
+    public int getPoints() {
+        return points;
+    }
+
+    /**
+     * @param points
+     *            the points to set
+     */
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    /**
+     * @return the theWinner
+     */
+    public boolean isTheWinner() {
+        return theWinner;
+    }
+
+    /**
+     * @param theWinner
+     *            the theWinner to set
+     */
+    public void setTheWinner(boolean theWinner) {
+        this.theWinner = theWinner;
+    }
 
 }

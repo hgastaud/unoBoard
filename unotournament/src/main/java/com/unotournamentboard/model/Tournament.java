@@ -117,6 +117,7 @@ public class Tournament {
      * 
      */
     protected void sortTheTournamentPlayer() {
+        // TODO is wrong
         Collections.sort(this.getTournamentPlayers(), new Comparator<PlayerInTournament>() {
 
             public int compare(PlayerInTournament o1, PlayerInTournament o2) {

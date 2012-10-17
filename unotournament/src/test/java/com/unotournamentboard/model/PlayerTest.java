@@ -1,13 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-// This file is the confidential property of Greenline Financial Technologies.
-// Possession, use, transmission, or disclosure of this file is prohibited
-// without express written authorization from Greenline Financial Technologies.
-// Copyright 2008 Greenline Financial Technologies. All rights reserved.
-////////////////////////////////////////////////////////////////////////////////
-
-/**
- * 
- */
 package com.unotournamentboard.model;
 
 import java.util.Iterator;
@@ -51,7 +41,6 @@ public class PlayerTest {
         Assert.assertTrue(this.getPlayer().getActive());
         Assert.assertEquals(Integer.valueOf(2), this.getPlayer().getWrongLogingAttemps());
         this.getPlayer().addNewFailLoginAttemp();
-        Assert.assertTrue(this.getPlayer().getActive());
         Assert.assertEquals(Integer.valueOf(3), this.getPlayer().getWrongLogingAttemps());
         this.getPlayer().addNewFailLoginAttemp();
         Assert.assertFalse(this.getPlayer().getActive());
