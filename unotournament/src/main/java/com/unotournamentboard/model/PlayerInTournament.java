@@ -9,49 +9,71 @@ package com.unotournamentboard.model;
  */
 public class PlayerInTournament {
 
-	private Player player;
+    private Player player;
 
-	private Integer points;
+    private Integer points;
 
-	private Integer numberOfHooks;
+    private Integer numberOfHooks;
 
-	public PlayerInTournament(Player player) {
-		this.setPlayer(player);
-		this.setPoints(0);
-		this.setNumberOfHooks(0);
-	}
+    private int finishRound;
 
-	public void addPoints(Integer points) {
-		this.setPoints(this.getPoints() + points);
-	}
+    public PlayerInTournament(Player player) {
+        this.setPlayer(player);
+        this.setPoints(0);
+        this.setNumberOfHooks(0);
+        this.setFinishRound(-1);
+    }
 
-	public void addHook(Integer newPoints) {
-		this.setNumberOfHooks(this.getNumberOfHooks() + 1);
-		this.setPoints(newPoints);
-	}
+    public void addPoints(Integer points) {
+        this.setPoints(this.getPoints() + points);
+    }
 
-	public Integer getNumberOfHooks() {
-		return numberOfHooks;
-	}
+    public void addHook(Integer newPoints) {
+        this.setNumberOfHooks(this.getNumberOfHooks() + 1);
+        this.setPoints(newPoints);
+    }
 
-	protected void setNumberOfHooks(Integer numberOfHooks) {
-		this.numberOfHooks = numberOfHooks;
-	}
+    public void gameOver(int round) {
+        this.setFinishRound(round);
+    }
 
-	protected Player getPlayer() {
-		return player;
-	}
+    public Integer getNumberOfHooks() {
+        return numberOfHooks;
+    }
 
-	protected void setPlayer(Player player) {
-		this.player = player;
-	}
+    protected void setNumberOfHooks(Integer numberOfHooks) {
+        this.numberOfHooks = numberOfHooks;
+    }
 
-	public Integer getPoints() {
-		return points;
-	}
+    protected Player getPlayer() {
+        return player;
+    }
 
-	protected void setPoints(Integer points) {
-		this.points = points;
-	}
+    protected void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    protected void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    /**
+     * @return the finishRound
+     */
+    protected int getFinishRound() {
+        return finishRound;
+    }
+
+    /**
+     * @param finishRound
+     *            the finishRound to set
+     */
+    protected void setFinishRound(int finishRound) {
+        this.finishRound = finishRound;
+    }
 
 }
