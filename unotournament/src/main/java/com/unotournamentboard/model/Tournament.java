@@ -117,17 +117,24 @@ public class Tournament {
      * 
      */
     protected void sortTheTournamentPlayer() {
-        // TODO is wrong
         Collections.sort(this.getTournamentPlayers(), new Comparator<PlayerInTournament>() {
 
             public int compare(PlayerInTournament o1, PlayerInTournament o2) {
-                if (o1.getFinishRound() < o2.getFinishRound()) {
-                    return 1;
-                } else {
-                    if (o1.getFinishRound() > o2.getFinishRound()) {
-                        return -1;
+                if (o1.getFinishRound() > 0 && o2.getFinishRound() > 0) {
+                    if (o1.getFinishRound() < o2.getFinishRound()) {
+                        return 1;
                     } else {
+                        if (o1.getFinishRound() > o2.getFinishRound()) {
+                            return -1;
+                        } else {
+                            return o1.getPoints().compareTo(o2.getPoints());
+                        }
+                    }
+                } else {
+                    if (o1.getFinishRound() == o2.getFinishRound()) {
                         return o1.getPoints().compareTo(o2.getPoints());
+                    } else {
+                        return Integer.valueOf(o1.getFinishRound()).compareTo(Integer.valueOf(o2.getFinishRound()));
                     }
                 }
             }
