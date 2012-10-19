@@ -50,8 +50,8 @@ public class Tournament {
 
     public Tournament(String name, int maxPoints, int maxHooks, Date start, Date end) {
         this.setName(name);
-        this.setMaxOfPoints(maxOfPoints);
-        this.setMaxOfHooks(maxOfHooks);
+        this.setMaxOfPoints(maxPoints);
+        this.setMaxOfHooks(maxHooks);
         this.setStartDate(start);
         this.setEndDate(end);
         this.setPlayers(new HashSet<Player>());
@@ -69,9 +69,9 @@ public class Tournament {
         this.getRounds().add(round);
         this.addTheFinalPointsForAllPlayers(round);
         int roundNumber = this.getRounds().size();
-        this.sortTheTournamentPlayer();
         int lastPositionPoints = this.getTheLastPositionPoints();
         this.removePlayersAndAddHooks(roundNumber, lastPositionPoints);
+        this.sortTheTournamentPlayer();
     }
 
     public boolean isTournamentFinsih() {
@@ -105,9 +105,8 @@ public class Tournament {
         for (int i = this.getTournamentPlayers().size() - 1; i >= 0; i--) {
             PlayerInTournament eachPlayer = this.getTournamentPlayers().get(i);
             Integer eachPlayerPoints = eachPlayer.getPoints();
-            if (eachPlayer.getFinishRound() < 0 && eachPlayerPoints < this.getMaxOfPoints()) {
+            if (eachPlayer.getFinishRound() < 0 && eachPlayerPoints < this.getMaxOfPoints() && eachPlayerPoints > lastPositionPoints) {
                 lastPositionPoints = eachPlayerPoints;
-                break;
             }
         }
         return lastPositionPoints;
@@ -132,7 +131,8 @@ public class Tournament {
                     }
                 } else {
                     if (o1.getFinishRound() == o2.getFinishRound()) {
-                        return o1.getPoints().compareTo(o2.getPoints());
+                        int poinsCompared = o1.getPoints().compareTo(o2.getPoints());
+                        return poinsCompared == 0 ? o1.getNumberOfHooks().compareTo(o2.getNumberOfHooks()) : poinsCompared;
                     } else {
                         return Integer.valueOf(o1.getFinishRound()).compareTo(Integer.valueOf(o2.getFinishRound()));
                     }
