@@ -26,6 +26,23 @@ public class PlayerRepositoryTest {
     @Test
     @Transactional
     public void persistPlayer() {
+        Player player = this.getPlayerRepo().save(new Player("Hernan", "Gastaud", "hgastaud", "12345", "Argentina", "asdsad@gks,.com"));
+        Assert.assertNotNull(player.getId());
+    }
+
+    /**
+     * @return the playerRepo
+     */
+    public PlayerRepository getPlayerRepo() {
+        return playerRepo;
+    }
+
+    /**
+     * @param playerRepo
+     *            the playerRepo to set
+     */
+    public void setPlayerRepo(PlayerRepository playerRepo) {
+        this.playerRepo = playerRepo;
     }
 
 }
