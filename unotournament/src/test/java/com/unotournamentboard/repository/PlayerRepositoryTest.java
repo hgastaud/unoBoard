@@ -28,6 +28,13 @@ public class PlayerRepositoryTest {
     public void persistPlayer() {
         Player player = this.getPlayerRepo().save(new Player("Hernan", "Gastaud", "hgastaud", "12345", "Argentina", "asdsad@gks,.com"));
         Assert.assertNotNull(player.getId());
+        Player mer = this.playerRepo.save(new Player("Mercedes", "Espineira", "mespineira", "12345", "Argentina", "sadsq@sad.com"));
+        player.addANewFriend(mer);
+        this.getPlayerRepo().save(player);
+        mer.addANewFriend(player);
+        this.getPlayerRepo().save(mer);
+        System.err.println("Hernan ID: " + player.getId());
+        System.err.println("Mercedes ID: " + mer.getId());
     }
 
     /**
