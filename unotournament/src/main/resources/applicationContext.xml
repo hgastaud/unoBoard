@@ -12,6 +12,8 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	<neo4j:config storeDirectory="data/unoTournament.db" />
+	<bean id="graphDatabaseService" class="org.neo4j.rest.graphdb.RestGraphDatabase">
+		<constructor-arg value="http://localhost:7474/db/data/" />
+	</bean>
 	<tx:annotation-driven mode="proxy" />
 </beans>
