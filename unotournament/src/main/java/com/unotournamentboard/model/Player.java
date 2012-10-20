@@ -41,7 +41,7 @@ public class Player {
     private Set<Player> friends;
 
     @RelatedToVia(type = "MEMBER_OF", direction = Direction.OUTGOING)
-    private Iterable<Member> memberships;
+    private Set<Member> memberships;
 
     public Player() {
         // Do nothing.
@@ -57,6 +57,7 @@ public class Player {
         this.setActive(false);
         this.setWrongLogingAttemps(0);
         this.setFriends(new HashSet<Player>());
+        this.setMemberships(new HashSet<Member>());
     }
 
     @Override
@@ -107,11 +108,11 @@ public class Player {
         return friendship;
     }
 
-    public Iterable<Member> getMemberships() {
+    public Set<Member> getMemberships() {
         return memberships;
     }
 
-    public void setMemberships(Iterable<Member> memberships) {
+    public void setMemberships(Set<Member> memberships) {
         this.memberships = memberships;
     }
 

@@ -3,6 +3,7 @@ package com.unotournamentboard.model;
 import java.util.Date;
 
 import org.springframework.data.neo4j.annotation.EndNode;
+import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.RelationshipEntity;
 import org.springframework.data.neo4j.annotation.StartNode;
 
@@ -15,6 +16,9 @@ import org.springframework.data.neo4j.annotation.StartNode;
 @RelationshipEntity(type = "FRIEND")
 public class Friendship {
 
+	@GraphId
+	private Long id;
+	
 	@StartNode
 	private Player startNode;
 
@@ -55,5 +59,13 @@ public class Friendship {
 	}
 
 	private Date date;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }

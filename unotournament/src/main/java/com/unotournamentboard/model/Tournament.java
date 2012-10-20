@@ -145,7 +145,7 @@ public class Tournament {
      * @param round
      */
     protected void addTheFinalPointsForAllPlayers(Round round) {
-        Iterator<PlayedRelationship> playersPlayed = round.getPlayersPlayed();
+        Iterator<PlayedRelationship> playersPlayed = round.getPlayersPlayed().iterator();
         while (playersPlayed.hasNext()) {
             final PlayedRelationship eachPlayerPlayed = playersPlayed.next();
             PlayerInTournament foundPlayer = (PlayerInTournament) CollectionUtils.find(this.getTournamentPlayers(), new Predicate() {

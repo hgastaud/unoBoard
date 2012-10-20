@@ -15,10 +15,10 @@ import org.springframework.data.neo4j.annotation.RelatedToVia;
 public class Round {
 
     @GraphId
-    private long id;
+    private Long id;
 
     @RelatedToVia(type = "PLAYED", direction = Direction.INCOMING)
-    private Iterator<PlayedRelationship> playersPlayed;
+    private Iterable<PlayedRelationship> playersPlayed;
 
     public Round() {
         // Do nothing.
@@ -35,7 +35,7 @@ public class Round {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -43,14 +43,14 @@ public class Round {
      * @param id
      *            the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     /**
      * @return the playersPlayed
      */
-    public Iterator<PlayedRelationship> getPlayersPlayed() {
+    public Iterable<PlayedRelationship> getPlayersPlayed() {
         return playersPlayed;
     }
 
@@ -58,7 +58,7 @@ public class Round {
      * @param playersPlayed
      *            the playersPlayed to set
      */
-    public void setPlayersPlayed(Iterator<PlayedRelationship> playersPlayed) {
+    public void setPlayersPlayed(Iterable<PlayedRelationship> playersPlayed) {
         this.playersPlayed = playersPlayed;
     }
 

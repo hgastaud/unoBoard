@@ -1,6 +1,7 @@
 package com.unotournamentboard.model;
 
 import org.springframework.data.neo4j.annotation.EndNode;
+import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.RelationshipEntity;
 import org.springframework.data.neo4j.annotation.StartNode;
 
@@ -11,6 +12,9 @@ import org.springframework.data.neo4j.annotation.StartNode;
 @RelationshipEntity
 public class PlayedRelationship {
 
+	@GraphId
+	private Long id;
+	
     @StartNode
     private Player player;
 
@@ -99,5 +103,21 @@ public class PlayedRelationship {
     public void setTheWinner(boolean theWinner) {
         this.theWinner = theWinner;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Boolean getTheWinner() {
+		return theWinner;
+	}
+
+	public void setTheWinner(Boolean theWinner) {
+		this.theWinner = theWinner;
+	}
 
 }
