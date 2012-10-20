@@ -44,7 +44,7 @@ public class TournamentTest {
         plays.add(round.endRoundFor(players.get(3).getPlayer(), Integer.valueOf(0)));
         plays.add(round.endRoundFor(players.get(4).getPlayer(), Integer.valueOf(1)));
         plays.add(round.wonTheRound(players.get(5).getPlayer()));
-        round.setPlayersPlayed(plays.iterator());
+        round.setPlayersPlayed(plays);
 
         this.getTournament().addTheFinalPointsForAllPlayers(round);
         Assert.assertEquals(Integer.valueOf(300), players.get(0).getPoints());
@@ -54,7 +54,7 @@ public class TournamentTest {
         Assert.assertEquals(Integer.valueOf(1), players.get(4).getPoints());
         Assert.assertEquals(Integer.valueOf(0), players.get(5).getPoints());
 
-        round.setPlayersPlayed(plays.iterator());
+        round.setPlayersPlayed(plays);
         this.getTournament().addTheFinalPointsForAllPlayers(round);
         Assert.assertEquals(Integer.valueOf(600), players.get(0).getPoints());
         Assert.assertEquals(Integer.valueOf(500), players.get(1).getPoints());
@@ -191,7 +191,7 @@ public class TournamentTest {
         round1PLayers.add(round1.endRoundFor((this.getTournament().getTournamentPlayers().get(3).getPlayer()), 5));
         round1PLayers.add(round1.endRoundFor((this.getTournament().getTournamentPlayers().get(4).getPlayer()), 12));
         round1PLayers.add(round1.endRoundFor((this.getTournament().getTournamentPlayers().get(5).getPlayer()), 7));
-        round1.setPlayersPlayed(round1PLayers.iterator());
+        round1.setPlayersPlayed(round1PLayers);
         this.getTournament().addANewRound(round1);
         
         Assert.assertFalse(this.getTournament().isTournamentFinsih());
@@ -223,7 +223,7 @@ public class TournamentTest {
         round2Players.add(round2.endRoundFor(this.getTournament().getTournamentPlayers().get(3).getPlayer(), 3));
         round2Players.add(round2.endRoundFor(this.getTournament().getTournamentPlayers().get(4).getPlayer(), 8));
         round2Players.add(round2.endRoundFor(this.getTournament().getTournamentPlayers().get(5).getPlayer(), 0));
-        round2.setPlayersPlayed(round2Players.iterator());
+        round2.setPlayersPlayed(round2Players);
         this.getTournament().addANewRound(round2);
         
         Assert.assertFalse(this.getTournament().isTournamentFinsih());
@@ -254,7 +254,7 @@ public class TournamentTest {
         round3Players.add(round3.endRoundFor(this.getTournament().getTournamentPlayers().get(2).getPlayer(), 1));
         round3Players.add(round3.endRoundFor(this.getTournament().getTournamentPlayers().get(3).getPlayer(), 3));
         round3Players.add(round3.endRoundFor(this.getTournament().getTournamentPlayers().get(4).getPlayer(), 1));
-        round3.setPlayersPlayed(round3Players.iterator());
+        round3.setPlayersPlayed(round3Players);
         this.getTournament().addANewRound(round3);
         
         Assert.assertFalse(this.getTournament().isTournamentFinsih());
@@ -286,7 +286,7 @@ public class TournamentTest {
         round4Players.add(round4.endRoundFor(this.getTournament().getTournamentPlayers().get(2).getPlayer(), 10));
         round4Players.add(round4.wonTheRound(this.getTournament().getTournamentPlayers().get(3).getPlayer()));
         round4Players.add(round4.endRoundFor(this.getTournament().getTournamentPlayers().get(4).getPlayer(), 0));
-        round4.setPlayersPlayed(round4Players.iterator());
+        round4.setPlayersPlayed(round4Players);
         this.getTournament().addANewRound(round4);
         
         Assert.assertFalse(this.getTournament().isTournamentFinsih());
@@ -316,7 +316,7 @@ public class TournamentTest {
         round5Players.add(round5.endRoundFor(this.getTournament().getTournamentPlayers().get(1).getPlayer(), 4));
         round5Players.add(round5.endRoundFor(this.getTournament().getTournamentPlayers().get(2).getPlayer(), 8));
         round5Players.add(round5.endRoundFor(this.getTournament().getTournamentPlayers().get(3).getPlayer(), 2));
-        round5.setPlayersPlayed(round5Players.iterator());
+        round5.setPlayersPlayed(round5Players);
         this.getTournament().addANewRound(round5);
         
         Assert.assertFalse(this.getTournament().isTournamentFinsih());
@@ -344,7 +344,7 @@ public class TournamentTest {
         List<PlayedRelationship> round6Players = new ArrayList<PlayedRelationship>();
         round6Players.add(round6.wonTheRound(this.getTournament().getTournamentPlayers().get(0).getPlayer()));
         round6Players.add(round6.endRoundFor(this.getTournament().getTournamentPlayers().get(1).getPlayer(), 1));
-        round6.setPlayersPlayed(round6Players.iterator());
+        round6.setPlayersPlayed(round6Players);
         this.getTournament().addANewRound(round6);
         
         Assert.assertFalse(this.getTournament().isTournamentFinsih());
@@ -372,7 +372,7 @@ public class TournamentTest {
         List<PlayedRelationship> round7Players = new ArrayList<PlayedRelationship>();
         round7Players.add(round7.endRoundFor(this.getTournament().getTournamentPlayers().get(0).getPlayer(), 10));
         round7Players.add(round7.wonTheRound(this.getTournament().getTournamentPlayers().get(1).getPlayer()));
-        round7.setPlayersPlayed(round7Players.iterator());
+        round7.setPlayersPlayed(round7Players);
         this.getTournament().addANewRound(round7);
         
         Assert.assertFalse(this.getTournament().isTournamentFinsih());
@@ -400,7 +400,7 @@ public class TournamentTest {
         List<PlayedRelationship> round8Players = new ArrayList<PlayedRelationship>();
         round8Players.add(round8.endRoundFor(this.getTournament().getTournamentPlayers().get(0).getPlayer(), 10));
         round8Players.add(round8.wonTheRound(this.getTournament().getTournamentPlayers().get(1).getPlayer()));
-        round8.setPlayersPlayed(round8Players.iterator());
+        round8.setPlayersPlayed(round8Players);
         this.getTournament().addANewRound(round8);
         
         Assert.assertTrue(this.getTournament().isTournamentFinsih());
